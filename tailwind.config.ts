@@ -7,6 +7,14 @@ export default {
       screens: {
         "3xl": "2560px",
       },
+      colors: {
+        "cstm-bg": "#060D17",
+        "cstm-bg-2": "#10171C",
+        "cstm-bg-3": "#1C252F",
+      },
+      maxWidth: {
+        "8xl": "1750px",
+      },
     },
   },
   plugins: [],

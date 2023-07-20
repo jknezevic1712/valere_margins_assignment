@@ -6,6 +6,10 @@ await import("./src/env.mjs");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  images: {
+    domains: ["image.tmdb.org"],
+  },
+
   reactStrictMode: true,
 
   /**
