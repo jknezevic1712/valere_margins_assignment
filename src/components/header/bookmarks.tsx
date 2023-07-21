@@ -37,7 +37,7 @@ const Bookmarks = () => {
           </div>
         </div>
         <BsFillBookmarkFill
-          className="cursor-pointer"
+          className="cursor-pointer text-yellow-400"
           onClick={() => setShowFavourites((v) => !v)}
         />
       </span>

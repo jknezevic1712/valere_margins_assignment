@@ -68,19 +68,30 @@ const CardTitle = ({
 );
 
 const Bookmark = ({
+  favMovies,
   saveFavMovies,
   movie,
 }: {
+  favMovies: FavouriteMovie[];
   saveFavMovies: (newFavouriteMovies: FavouriteMovie[]) => void;
   movie: APIDiscoverMovieResponse | APIMovieResponse | FavouriteMovie;
-}) => (
-  <div className="absolute left-0 top-0 m-4 hidden transition-all group-hover:lg:z-20 group-hover:lg:block group-hover:lg:cursor-pointer">
-    <BsFillBookmarkFill
-      className="text-yellow-400"
-      onClick={() => saveToFavourites(movie, saveFavMovies)}
-    />
-  </div>
-);
+}) => {
+  const isMovieBookmarked = () =>
+    favMovies.find((favMovie) => favMovie.id === movie.id);
+
+  return (
+    <div className="absolute left-0 top-0 z-20 m-4 block transition-all lg:hidden group-hover:lg:block group-hover:lg:cursor-pointer">
+      <BsFillBookmarkFill
+        className={`transition-all ${
+          isMovieBookmarked()
+            ? "text-emerald-400  hover:text-rose-400"
+            : "text-rose-400  hover:text-emerald-400"
+        }`}
+        onClick={() => saveToFavourites(movie, saveFavMovies)}
+      />
+    </div>
+  );
+};
 
 const Card = ({
   movie,
@@ -89,6 +100,7 @@ const Card = ({
   movie: APIDiscoverMovieResponse | APIMovieResponse | FavouriteMovie;
   cardType: "bookmark" | "slide" | "detail";
 }) => {
+  const favMovies = useStore((state) => state.favouriteMovies);
   const saveFavMovies = useStore((state) => state.saveFavouriteMovies);
 
   return (
@@ -101,7 +113,11 @@ const Card = ({
           : "w-full "
       }`}
     >
-      <Bookmark saveFavMovies={saveFavMovies} movie={movie} />
+      <Bookmark
+        favMovies={favMovies}
+        saveFavMovies={saveFavMovies}
+        movie={movie}
+      />
 
       <CardTitle showTitle={cardType === "slide"} title={movie.title} />
 

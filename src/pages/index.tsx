@@ -20,7 +20,7 @@ export default function Home() {
         <div className="mb-32 mt-12 flex flex-col items-center justify-center gap-4">
           <Link
             href="/discover"
-            className="rounded-lg bg-yellow-400 px-8 py-4 font-semibold text-zinc-800"
+            className="rounded-lg bg-yellow-400 px-8 py-4 font-semibold text-zinc-800 lg:hover:opacity-80"
           >
             <button type="button">Otkrijte filmove i serije</button>
           </Link>
