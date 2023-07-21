@@ -14,10 +14,6 @@ type SpokenLanguage = {
   name: string;
 };
 type APIMovieResponse = {
-  adult: boolean;
-  backdrop_path: string;
-  belongs_to_collection: null;
-  budget: number;
   genres: {
     id: number;
     name: string;
