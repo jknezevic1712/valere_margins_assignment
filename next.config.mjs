@@ -10,7 +10,7 @@ const config = {
     domains: ["image.tmdb.org"],
   },
 
-  reactStrictMode: true,
+  reactStrictMode: false,
 
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config

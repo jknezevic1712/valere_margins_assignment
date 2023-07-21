@@ -61,7 +61,7 @@ type APIDiscoverMovieResponse = {
   vote_count: number;
 };
 
-type APIMovieGenresResponse = {
+type APIMovieGenreResponse = {
   id: number;
   name: string;
-}[];
+};

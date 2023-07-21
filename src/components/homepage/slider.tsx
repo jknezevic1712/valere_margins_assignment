@@ -5,16 +5,12 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import blankImage from "public/placeholder_img.png";
 
 import { env } from "~/env.mjs";
-import { fetchDiscoverMovies, fetchMoviesByGenre } from "~/api/requests";
-import { useState } from "react";
+import useStore from "~/store";
 
 type SliderProps = {
   title: string;
   categoryHorizontalSlider?: boolean;
-  genre?: {
-    id: number;
-    name: string;
-  };
+  arrayIdx?: number;
 };
 
 const saveToFavourites = (movie: APIDiscoverMovieResponse) => {
@@ -54,7 +50,7 @@ const SliderCard = ({ movie }: { movie: APIDiscoverMovieResponse }) => {
               ? `https://image.tmdb.org/t/p/original${movie.poster_path}?api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`
               : blankImage.src
           }`}
-          alt={movie.title}
+          alt={movie.title ?? ""}
           fill
           sizes="200px, (min-width: 768px) 500px"
           blurDataURL={
@@ -71,16 +67,11 @@ const SliderCard = ({ movie }: { movie: APIDiscoverMovieResponse }) => {
 const Slider = ({
   title,
   categoryHorizontalSlider = false,
-  genre,
+  arrayIdx,
 }: SliderProps) => {
   if (categoryHorizontalSlider) {
-    const [movieList, setMovieList] = useState(
-      [] as APIDiscoverMovieResponse[]
-    );
-
-    fetchMoviesByGenre(genre?.id.toString() ?? "", (movies) => {
-      setMovieList(movies);
-    });
+    const stateGenreMovies = useStore((state) => state.genreMovies);
+    let i = 1;
 
     return (
       <div className="flex w-full flex-col items-center">
@@ -93,22 +84,31 @@ const Slider = ({
         >
           <div className="mx-auto">
             <div id="slider" className="flex h-full w-full gap-8 p-8">
-              {movieList.map((val, idx) => (
-                <SliderCard key={idx} movie={val} />
-              ))}
+              {typeof arrayIdx !== "undefined" && stateGenreMovies.length > 0
+                ? stateGenreMovies[arrayIdx]!.map((genreMovies, idx) => {
+                    console.log(genreMovies);
+                    console.log(i);
+                    i++;
+
+                    return <SliderCard key={idx} movie={genreMovies} />;
+                  })
+                : "Loading...."}
             </div>
           </div>
         </div>
       </div>
     );
   } else {
-    const [movieList, setMovieList] = useState(
-      [] as APIDiscoverMovieResponse[]
-    );
+    const stateMovies = useStore((state) => state.movies);
 
-    fetchDiscoverMovies((movies) => {
-      setMovieList(movies);
-    });
+    // const [movieList, setMovieList] = useState(
+    //   [] as APIDiscoverMovieResponse[]
+    // );
+
+    // fetchDiscoverMovies((movies) => {
+    //   // setMovieList(movies);
+    //   console.log("MOVIES ", movies);
+    // });
 
     return (
       <div className="flex w-full flex-col items-center">
@@ -117,9 +117,11 @@ const Slider = ({
         </h2>
         <div className="my-10 flex w-full flex-col items-center justify-start">
           <div className="flex flex-wrap justify-center gap-12 p-8">
-            {movieList.map((val, idx) => (
-              <SliderCard key={idx} movie={val} />
-            ))}
+            {stateMovies.length > 0
+              ? stateMovies.map((val, idx) => (
+                  <SliderCard key={idx} movie={val} />
+                ))
+              : "Loading...."}
           </div>
         </div>
       </div>

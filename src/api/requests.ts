@@ -21,7 +21,7 @@ export const fetchDiscoverMovies = (
 };
 
 export const fetchMovieGenres = (
-  callback: (genres: APIMovieGenresResponse) => void
+  callback: (genres: APIMovieGenreResponse[]) => void
 ) => {
   axios
     .get(
@@ -29,8 +29,7 @@ export const fetchMovieGenres = (
       https://api.themoviedb.org/3/genre/movie/list?api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`
     )
     .then(function (response) {
-      // console.log("response.data ", response.data);
-      callback(response.data.genres as APIMovieGenresResponse);
+      callback(response.data.genres as APIMovieGenreResponse[]);
     })
     .catch(function (err) {
       console.error("Error while fetching movies genres! ", err);
@@ -38,19 +37,20 @@ export const fetchMovieGenres = (
 };
 
 export const fetchMoviesByGenre = (
-  genreId: string,
+  genres: APIMovieGenreResponse[],
   callback: (movies: APIDiscoverMovieResponse[]) => void
 ) => {
+  const urls = genres.map(
+    (genre) =>
+      `https://api.themoviedb.org/3/discover/movie?with_genres=${genre.id}&api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`
+  );
+
+  const requests = urls.map((url) => axios.get(url));
+
   axios
-    .get(
-      `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`
-    )
-    .then((response) => {
-      callback(
-        (response.data.results as APIDiscoverMovieResponse[]).splice(0, 10)
-      );
-    })
-    .catch((err) => {
-      console.error("Error while fetching movies by genre! ", err);
+    .all(requests)
+    .then((responses) => responses.map((resp) => resp.data.results))
+    .then((movies: APIDiscoverMovieResponse[]) => {
+      callback(movies);
     });
 };

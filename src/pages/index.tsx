@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import placeholder from "public/placeholder_img.png";
-import Slider from "~/components/homepage/slider";
-import Card from "~/components/shared/card";
 
 export default function Home() {
   return (
