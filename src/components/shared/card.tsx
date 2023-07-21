@@ -61,7 +61,7 @@ const CardTitle = ({
       showTitle ? "bg-cstm-bg bg-opacity-40" : ""
     }`}
   >
-    <h3 className="p-6 text-center text-xl font-bold text-zinc-100">
+    <h3 className="p-6 text-center text-xl font-bold">
       {showTitle ? title : ""}
     </h3>
   </div>
@@ -74,7 +74,7 @@ const Bookmark = ({
   saveFavMovies: (newFavouriteMovies: FavouriteMovie[]) => void;
   movie: APIDiscoverMovieResponse | APIMovieResponse | FavouriteMovie;
 }) => (
-  <div className="absolute left-0 top-0 hidden p-4 transition-all group-hover:lg:z-20 group-hover:lg:block group-hover:lg:cursor-pointer">
+  <div className="absolute left-0 top-0 m-4 hidden transition-all group-hover:lg:z-20 group-hover:lg:block group-hover:lg:cursor-pointer">
     <BsFillBookmarkFill
       className="text-yellow-400"
       onClick={() => saveToFavourites(movie, saveFavMovies)}
@@ -93,7 +93,7 @@ const Card = ({
 
   return (
     <div
-      className={`group relative transition-all ${
+      className={`group relative text-zinc-100 transition-all ${
         cardType === "slide"
           ? "h-[300px] w-[200px] md:h-[500px] md:w-[320px] lg:hover:scale-105"
           : cardType === "detail"
@@ -147,7 +147,7 @@ const Card = ({
       ) : (
         <Link href={`/movie/${movie.id}`}>
           <div className="flex items-center justify-start gap-6 rounded-sm p-2 transition-all lg:hover:bg-cstm-bg">
-            <div className="w-1/2">
+            <div className="w-1/3">
               <Image
                 src={`${
                   movie.poster_path
@@ -161,7 +161,7 @@ const Card = ({
                 className="rounded-sm"
               />
             </div>
-            <div className="w-1/2 p-2">
+            <div className="flex-1 p-2">
               <span className="max-w-[80px] break-words text-lg font-semibold">
                 {movie.title}
               </span>

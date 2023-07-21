@@ -9,9 +9,6 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(
     null as null | APIMovieResponse
   );
-  // https://api.themoviedb.org/3/search/movie?query=Avengers
-
-  console.log("movieDetails ", movieDetails);
 
   useEffect(() => {
     if (router.query.slug) {
