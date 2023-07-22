@@ -14,15 +14,15 @@ export default function Home() {
       </Head>
       <div className="flex h-full w-full flex-col items-center justify-center">
         <h1 className="text-center text-4xl font-bold text-zinc-100">
-          Vaš vodič za streaming filmovi, TV serije i sport
+          Your guide to streaming movies, TV series and sports
         </h1>
 
         <div className="mb-32 mt-12 flex flex-col items-center justify-center gap-4">
           <Link
             href="/discover"
-            className="rounded-lg bg-yellow-400 px-8 py-4 font-semibold text-zinc-800 lg:hover:opacity-80"
+            className="rounded-lg bg-yellow-400 px-8 py-4 font-semibold text-zinc-800 transition-all lg:hover:opacity-80"
           >
-            <button type="button">Otkrijte filmove i serije</button>
+            <button type="button">Discover movies and series</button>
           </Link>
         </div>
       </div>
