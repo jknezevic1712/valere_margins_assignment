@@ -98,7 +98,7 @@ const Card = ({
   cardType = "slide",
 }: {
   movie: APIDiscoverMovieResponse | APIMovieResponse | FavouriteMovie;
-  cardType: "bookmark" | "slide" | "detail";
+  cardType: "slide" | "small" | "detailPage";
 }) => {
   const favMovies = useStore((state) => state.favouriteMovies);
   const saveFavMovies = useStore((state) => state.saveFavouriteMovies);
@@ -108,7 +108,7 @@ const Card = ({
       className={`group relative text-zinc-100 transition-all ${
         cardType === "slide"
           ? "h-[300px] w-[200px] md:h-[500px] md:w-[320px] lg:hover:scale-105"
-          : cardType === "detail"
+          : cardType === "detailPage"
           ? "h-[25rem] w-[15rem] lg:h-[30rem] lg:w-[20rem]"
           : "w-full "
       }`}
@@ -142,7 +142,7 @@ const Card = ({
             className="rounded-sm"
           />
         </Link>
-      ) : cardType === "detail" ? (
+      ) : cardType === "detailPage" ? (
         <div className="absolute top-0 h-full w-full">
           <Image
             src={`${

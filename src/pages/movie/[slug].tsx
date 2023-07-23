@@ -36,7 +36,7 @@ const MovieDetails = () => {
             </h2>
           </div>
           <div className="flex w-full flex-col items-center justify-center md:flex-row md:gap-6">
-            <Card movie={movieDetails} cardType="detail" />
+            <Card movie={movieDetails} cardType="detailPage" />
             <div className="mt-8 flex flex-col gap-6 md:ml-4 md:mt-0 md:w-1/2 lg:w-2/5">
               <div>
                 <h3 className="text-xl font-semibold">Synopsis</h3>

@@ -27,7 +27,7 @@ const Bookmarks = () => {
           <div className="absolute right-0 top-0 mt-12 flex max-h-[50dvh] w-full flex-col gap-6 overflow-y-auto rounded-sm border border-yellow-400 bg-cstm-bg-3 p-4 text-zinc-100">
             {favouriteMovies.length > 0 ? (
               favouriteMovies.map((movie, idx) => (
-                <Card key={idx} movie={movie} cardType="bookmark" />
+                <Card key={idx} movie={movie} cardType="small" />
               ))
             ) : (
               <div className="flex w-full items-center justify-center">
