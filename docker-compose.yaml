@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  app:
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_CLIENTVAR: "fb923a8e0313d439ee9c7242bedf43c8"
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    image: val_mar_assignment_image
