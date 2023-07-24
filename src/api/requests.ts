@@ -24,7 +24,7 @@ export const searchMovie = (
       cb((response.data.results as APIDiscoverMovieResponse[]).splice(0, 5));
     })
     .catch(function (err) {
-      console.error("Error while fetching movies! ", err);
+      console.error("Error with searchMovie API call! ", err);
     });
 };
 
@@ -38,7 +38,7 @@ export const fetchGenres = (cb: (genres: APIMovieGenreResponse[]) => void) => {
       cb(response.data.genres as APIMovieGenreResponse[]);
     })
     .catch(function (err) {
-      console.error("Error while fetching genres! ", err);
+      console.error("Error with fetchGenres API call! ", err);
     });
 };
 
@@ -52,8 +52,11 @@ export const fetchMoviesSortedByReleaseDates = (
     .then(function (response) {
       cb((response.data.results as APIDiscoverMovieResponse[]).splice(0, 8));
     })
-    .catch(function (error) {
-      console.error("Error while fetching movies! ", error);
+    .catch(function (err) {
+      console.error(
+        "Error with fetchMoviesSortedByReleaseDates API call! ",
+        err
+      );
     });
 };
 
@@ -77,6 +80,9 @@ export const fetchBatchMoviesWithGenres = (
       );
 
       cb(formattedGenreMovies);
+    })
+    .catch(function (err) {
+      console.error("Error with fetchBatchMoviesWithGenres API call! ", err);
     });
 };
 
@@ -93,6 +99,6 @@ export const fetchMovieByMovieID = (
       cb(response.data as APIMovieResponse);
     })
     .catch(function (err) {
-      console.error("Error while fetching movies genres! ", err);
+      console.error("Error with fetchMovieByMovieID API call! ", err);
     });
 };
