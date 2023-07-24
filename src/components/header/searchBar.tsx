@@ -1,31 +1,18 @@
-import axios from "axios";
-import { useState, useEffect, type SetStateAction, type Dispatch } from "react";
+import { useState, useEffect } from "react";
 
 import { SlMagnifier } from "react-icons/sl";
 import { TfiClose } from "react-icons/tfi";
 import Card from "../shared/card";
 
-import { env } from "~/env.mjs";
+import { SearchResultsProps } from "~/types/general";
+import { searchMovie } from "~/api/requests";
 
 const SearchResults = ({
   results,
   searchQuery,
   setShowResultsMenu,
   setSearchQuery,
-}: {
-  results: APIDiscoverMovieResponse[];
-  searchQuery: {
-    searchText: string;
-    release_year: number;
-  };
-  setShowResultsMenu: Dispatch<SetStateAction<boolean>>;
-  setSearchQuery: Dispatch<
-    SetStateAction<{
-      searchText: string;
-      release_year: number;
-    }>
-  >;
-}) => (
+}: SearchResultsProps) => (
   <div className="absolute left-0 top-0 mt-14 flex w-full gap-4 text-xl">
     <span className="relative text-base">
       <div className="absolute left-0 top-0 min-w-[20rem]">
@@ -57,13 +44,13 @@ const SearchResults = ({
             />
           </div>
 
-          {results.length > 0 ? (
+          {results.length > 0 && (
             <div className="max-h-[50dvh] overflow-y-auto">
               {results.map((movie, idx) => (
                 <Card key={idx} movie={movie} cardType="small" />
               ))}
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </span>
@@ -80,31 +67,13 @@ const SearchBar = () => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      axios
-        .get(
-          `
-            https://api.themoviedb.org/3/search/movie?query=${
-              searchQuery.searchText
-            }${
-            searchQuery.release_year
-              ? `&primary_release_year=${searchQuery.release_year}`
-              : ""
-          }&api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`
-        )
-        .then(function (response) {
-          setResults(
-            (response.data.results as APIDiscoverMovieResponse[]).splice(0, 5)
-          );
-        })
-        .catch(function (err) {
-          console.error("Error while fetching movies! ", err);
-        });
+      searchMovie(searchQuery, (movies) => {
+        setResults(movies);
+      });
     };
 
     const timeout = setTimeout(() => {
-      if (searchQuery.searchText.length > 0) {
-        fetchResults();
-      }
+      searchQuery.searchText.length > 0 && fetchResults();
     }, 500);
 
     return () => clearTimeout(timeout);

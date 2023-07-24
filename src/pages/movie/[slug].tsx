@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { fetchMovieByMovieID } from "~/api/requests";
 import Card from "~/components/shared/card";
-import { env } from "~/env.mjs";
 
 const MovieDetails = () => {
   const router = useRouter();
@@ -11,18 +10,10 @@ const MovieDetails = () => {
   );
 
   useEffect(() => {
-    if (router.query.slug) {
-      axios
-        .get(
-          `
-          https://api.themoviedb.org/3/movie/${router.query.slug}?api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`
-        )
-        .then(function (response) {
-          setMovieDetails(response.data as APIMovieResponse);
-        })
-        .catch(function (err) {
-          console.error("Error while fetching movies genres! ", err);
-        });
+    if (router.query.slug && typeof router.query.slug === "string") {
+      fetchMovieByMovieID(router.query.slug, (movie) => {
+        setMovieDetails(movie);
+      });
     }
   }, [router.query.slug]);
 

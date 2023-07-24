@@ -4,9 +4,6 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      screens: {
-        "3xl": "2560px",
-      },
       colors: {
         "cstm-bg": "#060D17",
         "cstm-bg-2": "#10171C",

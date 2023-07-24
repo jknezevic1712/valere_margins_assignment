@@ -8,23 +8,3 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-
-/* ::-webkit-scrollbar {
-  width: 10px;
-  height: 15px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #1c252f;
-  border-radius: 10px;
-  background-color: #959594;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1c252f;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #333;
-} */

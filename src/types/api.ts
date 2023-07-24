@@ -61,3 +61,9 @@ type APIMovieGenreResponse = {
   id: number;
   name: string;
 };
+
+type FavouriteMovie = {
+  id: number;
+  title: string;
+  poster_path: string;
+};

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import useStore from "~/store";
 
-import { BsFillBookmarkFill } from "react-icons/bs";
 import blankImage from "public/placeholder_img.png";
 
 import { env } from "~/env.mjs";
@@ -82,7 +81,7 @@ const Bookmark = ({
   return (
     <div
       className={`absolute left-0 top-0 z-20 m-4 block transition-all group-hover:lg:cursor-pointer ${
-        cardType !== "detailPage" ? "lg:hidden group-hover:lg:block" : ""
+        cardType !== "detailPage" && "lg:hidden group-hover:lg:block"
       }`}
     >
       <span
@@ -112,9 +111,8 @@ const Card = ({
       className={`group relative text-zinc-100 transition-all ${
         cardType === "slide"
           ? "h-[300px] w-[200px] md:h-[500px] md:w-[320px] lg:hover:scale-105"
-          : cardType === "detailPage"
-          ? "h-[25rem] w-[15rem] lg:h-[30rem] lg:w-[20rem]"
-          : "w-full "
+          : cardType === "detailPage" &&
+            "h-[25rem] w-[15rem] lg:h-[30rem] lg:w-[20rem]"
       }`}
     >
       <Bookmark

@@ -1,5 +1,4 @@
 import Header from "./header/header";
-import Footer from "./footer";
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   return (
@@ -9,7 +8,6 @@ const Layout = ({ children }: { children: JSX.Element }) => {
         <main className="flex justify-center px-4 lg:mt-20">
           <div className="w-full max-w-8xl">{children}</div>
         </main>
-        {/* <Footer /> */}
       </div>
     </div>
   );
