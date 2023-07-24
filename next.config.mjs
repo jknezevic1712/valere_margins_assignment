@@ -13,7 +13,7 @@ const config = {
     defaultLocale: "en",
   },
 
-  output: "standalone"
+  output: "standalone",
 };
 
 export default config;

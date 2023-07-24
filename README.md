@@ -4,14 +4,14 @@
 
 ### Production environment
 
-1. npm install
-2. npm run build
-3. npm run start
+1. `npm install`
+2. `npm run build`
+3. `npm start`
 
 ### Development environment
 
-1. npm install
-2. npm run dev
+1. `npm install`
+2. `npm run dev`
 
 ## Docker
 
