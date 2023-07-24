@@ -10,10 +10,9 @@ export default function Home() {
           name="description"
           content="Valere Margins Frontend Developer Assignment"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex h-full w-full flex-col items-center justify-center">
-        <h1 className="text-center text-4xl font-bold text-zinc-100">
+        <h1 className="my-10 text-center text-4xl font-bold text-zinc-100">
           Your guide to streaming movies, TV series and sports
         </h1>
 

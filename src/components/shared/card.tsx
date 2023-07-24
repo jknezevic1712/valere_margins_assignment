@@ -58,12 +58,10 @@ const CardTitle = ({
 }) => (
   <div
     className={`pointer-events-none absolute z-10 hidden h-full w-full select-none items-center justify-center group-hover:flex ${
-      showTitle ? "bg-cstm-bg bg-opacity-40" : ""
+      showTitle && "bg-cstm-bg bg-opacity-40"
     }`}
   >
-    <h3 className="p-6 text-center text-xl font-bold">
-      {showTitle ? title : ""}
-    </h3>
+    <h3 className="p-6 text-center text-xl font-bold">{showTitle && title}</h3>
   </div>
 );
 
@@ -71,24 +69,30 @@ const Bookmark = ({
   favMovies,
   saveFavMovies,
   movie,
+  cardType,
 }: {
   favMovies: FavouriteMovie[];
   saveFavMovies: (newFavouriteMovies: FavouriteMovie[]) => void;
   movie: APIDiscoverMovieResponse | APIMovieResponse | FavouriteMovie;
+  cardType: "slide" | "small" | "detailPage";
 }) => {
   const isMovieBookmarked = () =>
     favMovies.find((favMovie) => favMovie.id === movie.id);
 
   return (
-    <div className="absolute left-0 top-0 z-20 m-4 block transition-all lg:hidden group-hover:lg:block group-hover:lg:cursor-pointer">
-      <BsFillBookmarkFill
-        className={`transition-all ${
-          isMovieBookmarked()
-            ? "text-emerald-400  hover:text-rose-400"
-            : "text-rose-400  hover:text-emerald-400"
-        }`}
+    <div
+      className={`absolute left-0 top-0 z-20 m-4 block transition-all group-hover:lg:cursor-pointer ${
+        cardType !== "detailPage" ? "lg:hidden group-hover:lg:block" : ""
+      }`}
+    >
+      <span
         onClick={() => saveToFavourites(movie, saveFavMovies)}
-      />
+        className={`rounded-md border border-yellow-400 bg-cstm-bg-3 px-2 py-1 text-xs font-semibold text-yellow-400 transition-all hover:border-yellow-500 hover:bg-yellow-400 hover:text-cstm-bg-3 ${
+          cardType !== "small" ? "2xl:text-sm" : ""
+        }`}
+      >
+        {isMovieBookmarked() ? "Saved" : "Save"}
+      </span>
     </div>
   );
 };
@@ -117,6 +121,7 @@ const Card = ({
         favMovies={favMovies}
         saveFavMovies={saveFavMovies}
         movie={movie}
+        cardType={cardType}
       />
 
       <CardTitle showTitle={cardType === "slide"} title={movie.title} />
@@ -143,7 +148,7 @@ const Card = ({
           />
         </Link>
       ) : cardType === "detailPage" ? (
-        <div className="absolute top-0 h-full w-full">
+        <div className="flex h-full w-full">
           <Image
             src={`${
               movie.poster_path
@@ -162,7 +167,7 @@ const Card = ({
         </div>
       ) : (
         <Link href={`/movie/${movie.id}`}>
-          <div className="flex items-center justify-start gap-6 rounded-sm p-2 transition-all lg:hover:bg-cstm-bg">
+          <div className="flex items-center justify-start gap-6 rounded-sm p-2 transition-all lg:hover:bg-cstm-bg lg:hover:bg-opacity-50">
             <div className="w-1/3">
               <Image
                 src={`${

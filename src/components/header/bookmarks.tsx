@@ -17,10 +17,10 @@ const Bookmarks = () => {
   }, [stateFavMovies]);
 
   return (
-    <div className="flex gap-4 text-xl">
+    <div className="z-40 flex gap-4 text-xl">
       <span className="relative text-base">
         <div
-          className={`absolute left-0 top-0 ${
+          className={`absolute left-0 top-0 lg:left-auto lg:right-0 ${
             showFavourites ? "flex min-w-[20rem]" : "hidden"
           }`}
         >

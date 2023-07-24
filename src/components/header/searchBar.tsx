@@ -29,7 +29,7 @@ const SearchResults = ({
   <div className="absolute left-0 top-0 mt-14 flex w-full gap-4 text-xl">
     <span className="relative text-base">
       <div className="absolute left-0 top-0 min-w-[20rem]">
-        <div className="absolute right-0 top-0 mt-12 flex w-full flex-col gap-6  rounded-sm border border-yellow-400 bg-cstm-bg-3 p-4">
+        <div className="absolute right-0 top-0 mt-1 flex w-full flex-col gap-6  rounded-sm border border-yellow-400 bg-cstm-bg-3 p-4">
           <div className="flex w-full items-center justify-end p-2">
             <span
               className="cursor-pointer text-xl"
@@ -43,7 +43,7 @@ const SearchResults = ({
             <input
               id="release_year"
               type="number"
-              placeholder="Enter a release year..."
+              placeholder="Search for a specific release year..."
               value={
                 searchQuery.release_year !== 0 ? searchQuery.release_year : ""
               }
@@ -111,7 +111,7 @@ const SearchBar = () => {
   }, [searchQuery]);
 
   return (
-    <div className="relative w-80 text-base lg:focus:flex-1">
+    <div className="relative z-50 w-80 text-base lg:focus:flex-1">
       <SlMagnifier className="absolute left-3 top-3" />
       <input
         type="text"
